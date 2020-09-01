@@ -12,3 +12,4 @@ An example command line input, running one simulation of a population of 500 ind
 ```
 bash callLoop_adaptiveDynamics.sh defaultParams.txt 500 100000 100 1 1
 ```
+Within the Matlab file ("plot_adaptiveDynamics.m") you can toggle on or off the needed analysis. Explanations are listed at the beginning of that file, allowing the user to specify if plots are needed, if branching and extinction should be recorded, and if equilibrium frequency should be calculated and recorded. 
