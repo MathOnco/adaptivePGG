@@ -1,3 +1,4 @@
+# Directions for running the game
 Using these four files, we can run and analyze the game, generating plots, recording branching and extinction events, and comparing equilibrium frequency of defectors to their observed frequency.
 
 First, compile the C++ file "adaptiveDynamics.cpp"
