@@ -347,7 +347,7 @@ if calculatePlotPstar>0
     
     %Plot the actual frequency of defectors 'pstarDefect'
     plot(pstarDefect,'x','Color','k')
-    plot(pstar4Avg, 'x', 'Color', 'blue')
+    #plot(pstar4Avg, 'x', 'Color', 'blue')
     
     %Plot the theoretical frequency
     plot(eqFreqDefect,'x', 'Color','red')
