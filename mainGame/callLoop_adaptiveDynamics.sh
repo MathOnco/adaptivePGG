@@ -21,9 +21,9 @@
 
 # Check to make sure correct number of arguments are given
 
-if [ "$#" -ne 7 ]; then
+if [ "$#" -ne 6 ]; then
   echo "Usage: ./call_adaptiveDynamics.sh <inputfile> <popsize> <genMax>\
- <recordInt> <loops> <saveFig> <saveParams>"
+ <recordInt> <loops> <saveParams>"
   exit 1
 fi
 
@@ -32,8 +32,7 @@ popsize=$2              # population size
 genMax=$3               # The maximum number of generations
 recordInt=$4            # The number of generations between recording to production/ns files
 loops=$5                # The number of trials to repeat
-saveFig=$6              # Set to 1 to save fig or 0 to not
-saveParams=$7           # Set to 1 to save the parameters and 0 to not
+saveParams=$6           # Set to 1 to save Parameters or 0 to not
 
 # Create output text files from popsize and genMax
 num=1
@@ -59,11 +58,6 @@ fi
 # This checks that recordInt is an integer
 if [[ -n ${recordInt//[0-9]/} ]]; then
     echo "recordInt should be an integer."
-    exit 2
-fi
-# This checks that saveFig is 0 or 1
-if [[ -n ${saveFig//[0,1]/} ]]; then
-    echo "saveFig can only be 0 or 1."
     exit 2
 fi
 # This checks that saveParams is 0 or 1
