@@ -18,4 +18,4 @@ Individual simulations can be run with information provided in mainGame folder.
 A and B require several simulations of identical mainGame inputs to generate probabilities of extinction and branching. D-F show equilibrium frequency plots of single simulations of mainGame. 3C shows both transition matrix and simulated results of initBranch game, with two subpopulations seeded and mutations prohibited.
 
 # Figure 4
-vectorFieldPlot.m generates the vector field shown in each panel of figure 4.
+vectorFieldPlot.m is a script which generates the vector field shown in each panel of figure 4. The user must enter the cooperator traits (production, ns) in order to generate the vector field for the defector subpopulation, which only exists for traits which are favored to maintain heterogeneity. plot_adaptiveDynamicsContour.m is a function that can be run with the mainGame to generate the contour plot of expected defector frequency given the location in trait space of the defector and cooperator subpopulation. The output of these two files was overlaid to create figure 4.
