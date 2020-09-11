@@ -263,7 +263,7 @@ if plotProNs>0
     sigma=2;
     beta=5;
     kappa=.5;
-    mu=2;
+    omega=2;
     
     %Production vs. Neighborhood size plot
     figure(1);
@@ -294,7 +294,7 @@ if plotProNs>0
 
     %loop to find zeroes of selection gradient over (x,ns) space
     for i=1:200
-        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,mu,x_axis(1,i));
+        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,omega,x_axis(1,i));
     end
     
     [~,x_minimum]=min(Zeroes);
@@ -371,7 +371,7 @@ if plotProNs>0
 
     %loop to find zeroes of selection gradient over (x,ns) space
     for i=1:200
-        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,mu,x_axis(1,i));
+        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,omega,x_axis(1,i));
     end
     
     [~,x_minimum]=min(Zeroes);
@@ -422,7 +422,7 @@ if plotProNs>0
 
     %loop to find zeroes of selection gradient over (x,ns) space
     for i=1:200
-        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,mu,x_axis(1,i));
+        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,omega,x_axis(1,i));
     end
     
     [~,x_minimum]=min(Zeroes);
@@ -473,7 +473,7 @@ if plotProNs>0
 
     %loop to find zeroes of selection gradient over (x,ns) space
     for i=1:200
-        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,mu,x_axis(1,i));
+        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,omega,x_axis(1,i));
     end
     
     [~,x_minimum]=min(Zeroes);
@@ -524,7 +524,7 @@ if plotProNs>0
 
     %loop to find zeroes of selection gradient over (x,ns) space
     for i=1:200
-        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,mu,x_axis(1,i));
+        Zeroes(1,i)=Root(alpha,beta,sigma,kappa,omega,x_axis(1,i));
     end
     
     [~,x_minimum]=min(Zeroes);
@@ -673,10 +673,10 @@ function eqFreq = pstarFn(xCoop, xDefect, nCoop, nDefect, popsize)
     %Nested Functions
     %First, define the actual payoff function
     function fitness = payoff(y,x,n)
-        beta = 5; sigma = 2; kappa = .5; mu = 2;
+        beta = 5; sigma = 2; kappa = .5; omega = 2;
         
         fitness = (1+exp(sigma))./(1+exp(sigma-beta.*(y+x.*(n-1))./n)) - ...
-            kappa.*tanh(y/(1-y)).^mu;
+            kappa.*tanh(y/(1-y)).^omega;
     end
         
     %define payoff function for ind that is Defector
@@ -777,9 +777,9 @@ function quiverArray=VecField(xCoop,nCoop,numXvecs,numYvecs,popsize)
     end
 
 end
-function Zero=Root(alpha,beta,sigma,kappa,mu,x)
+function Zero=Root(alpha,beta,sigma,kappa,omega,x)
     syms n  
     Zero=double(vpasolve(alpha*beta*exp(sigma-beta*x)*(1+exp(sigma))/...
         ((1+exp(sigma-beta*x))^2*n)...
-        -kappa*mu*(1/(1-x)+x/(1-x)^2)*sech(x/(1-x))^2*tanh(x/(1-x))^(mu-1)==0,n));
+        -kappa*omega*(1/(1-x)+x/(1-x)^2)*sech(x/(1-x))^2*tanh(x/(1-x))^(omega-1)==0,n));
 end
