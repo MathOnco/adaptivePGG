@@ -27,7 +27,7 @@
             beta:           Freq. dep. benefit parameter
             alpha:          Growth rate
             kappa:          Cost at full production P = 1
-            mu:             Shape parameter of cost function
+            omega:             Shape parameter of cost function
             NSsigma:        Std. dev. of neighborhood size if mutation occurs
             Psigma:         Std. dev. of production trait if mutation occurs
             mutThreshold:   Threshold for mutation to occur
@@ -71,11 +71,11 @@ void initializePopulationTraits(int popsize, double nMin, double nMax,
 double N01, double N02, double stdevN0, double P01, double P02, double stdevP0, 
 double *neighborhoodSizes, double *productionTrait, int verbosity);
 
-double payoff(double sigma, double beta, double alpha, double kappa, double mu,
+double payoff(double sigma, double beta, double alpha, double kappa, double omega,
 double n, double p, double meanProductionTrait, int verbosity);
 
 void runAdaptiveDynamics(int popsize, double nMin, double nMax, double sigma,
-double beta, double alpha, double kappa, double mu, double NSsigma,
+double beta, double alpha, double kappa, double omega, double NSsigma,
 double Psigma, double *neighborhoodSizes, double *productionTrait, int genMax,
 double mutThreshold, double *nsRecord, double *productionRecord, int recordInt, int verbosity);
 
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
     }
 
     // Initialize parameters
-    double nMin, nMax, sigma, beta, alpha, kappa, mu, NSsigma, Psigma,
+    double nMin, nMax, sigma, beta, alpha, kappa, omega, NSsigma, Psigma,
     mutThreshold, N01, N02, stdevN0, P01, P02, stdevP0;
     int verbosity;
 
@@ -138,10 +138,10 @@ int main(int argc, char* argv[])
         kappa = 0.5;
         printf("failed to read kappa. Using default value.\n");
     }
-    if (fscanf(inputfile, "%lf", &mu) != 1)
+    if (fscanf(inputfile, "%lf", &omega) != 1)
     {
-        mu = 2.0;
-        printf("failed to read mu. Using default value.\n");
+        omega = 2.0;
+        printf("failed to read omega. Using default value.\n");
     }
     if (fscanf(inputfile, "%lf", &NSsigma) != 1)
     {
@@ -220,7 +220,7 @@ int main(int argc, char* argv[])
 
     // run Adaptive dynamics
     runAdaptiveDynamics(popsize, nMin, nMax, sigma, beta, alpha, kappa,
-    mu, NSsigma, Psigma, neighborhoodSizes, productionTrait, genMax, mutThreshold, 
+    omega, NSsigma, Psigma, neighborhoodSizes, productionTrait, genMax, mutThreshold, 
     nsRecord, productionRecord, recordInt, verbosity);
 
     // Open the outputfiles.
@@ -342,7 +342,7 @@ double *neighborhoodSizes, double *productionTrait, int verbosity)
         beta - The freq-dependent impact of the public good
         alpha - The growth rate
         kappa - The cost at maximum production
-        mu - Shape parameter of the cost function
+        omega - Shape parameter of the cost function
         n - Individual's neighborhood size
         p - Individual's production trait
         meanProductionTrait - Mean production of the public good in pop.
@@ -351,7 +351,7 @@ double *neighborhoodSizes, double *productionTrait, int verbosity)
     OUTPUTS
         payoff = benefit - cost
 */
-double payoff(double sigma, double beta, double alpha, double kappa, double mu, int n, double p, double meanProductionTrait, int verbosity)
+double payoff(double sigma, double beta, double alpha, double kappa, double omega, int n, double p, double meanProductionTrait, int verbosity)
 {
 
     // The expected amount of public good perceived by the individual
@@ -362,7 +362,7 @@ double payoff(double sigma, double beta, double alpha, double kappa, double mu, 
     (1+exp(sigma-beta*expectedPublicGood));
 
     // Cost function
-    double cost = kappa*pow(tanh(p/(1.0-p)),mu);
+    double cost = kappa*pow(tanh(p/(1.0-p)),omega);
 
     // Payoff function
     return benefit - cost;
@@ -384,7 +384,7 @@ double payoff(double sigma, double beta, double alpha, double kappa, double mu, 
         beta -      The freq-dependent impact of the public good
         alpha -     The growth rate
         kappa -     The cost at maximum production
-        mu -        Shape parameter of the cost function
+        omega -        Shape parameter of the cost function
         NSsigma -   The std dev of the neighborhood size when mutated
         Psigma -    The std dev of the production trait when mutated
         neighborhoodSizes - Array that contains an individuals neighborhood size
@@ -399,7 +399,7 @@ double payoff(double sigma, double beta, double alpha, double kappa, double mu, 
 
 */
 void runAdaptiveDynamics(int popsize, double nMin, double nMax, double sigma,
-double beta, double alpha, double kappa, double mu, double NSsigma,
+double beta, double alpha, double kappa, double omega, double NSsigma,
 double Psigma, double *neighborhoodSizes, double *productionTrait, int genMax,
 double mutThreshold, double *nsRecord, double *productionRecord, int recordInt, int verbosity)
 {
@@ -512,7 +512,7 @@ double mutThreshold, double *nsRecord, double *productionRecord, int recordInt, 
             }
 
             //Payoff Function
-            fitness[k]= payoff(sigma, beta, alpha, kappa, mu, individualNS, productionTrait[ROW_COL_TO_INDEX(nGen, k, popsize)],
+            fitness[k]= payoff(sigma, beta, alpha, kappa, omega, individualNS, productionTrait[ROW_COL_TO_INDEX(nGen, k, popsize)],
             mean, verbosity);
 
             double numCoop = productionTrait[ROW_COL_TO_INDEX(nGen, k, popsize)];
