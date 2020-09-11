@@ -192,10 +192,10 @@ function eqFreq = pstarFn(xCoop, xDefect, nCoop, nDefect, popsize)
 end
 %Define the actual payoff function
 function fitness = payoff(y,x,n)
-    beta = 5; sigma = 2; kappa = .5; mu = 2;
+    beta = 5; sigma = 2; kappa = .5; omega = 2;
         
     fitness = (1+exp(sigma))./(1+exp(sigma-beta.*(y+x.*(n-1))./n)) - ...
-        kappa.*tanh(y/(1-y)).^mu;
+        kappa.*tanh(y/(1-y)).^omega;
 end
 %define payoff function for ind that is Defector
 function fitnessDefect = payoffDefect(xDefect,xCoop, nDefect,pstar,popsize)
