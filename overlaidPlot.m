@@ -1,7 +1,6 @@
-function overlaidPlot(proFile1, proFile2, proFile3, proFile4, proFile5, proFile6,...
-    proFile7)
+function overlaidPlot(proFile1, proFile2, proFile3, proFile4, proFile5, proFile6)
 
-%Define the params we used
+%Set the params you use
 popsize=1000;
 recordInt=100;
 genMax=60000;
@@ -38,10 +37,6 @@ fileID = fopen(proFile6);
 production_needs_reshaping6 = fread(fileID,[genAdj popsize],'double');
 fclose(fileID);
 
-fileID = fopen(proFile7);
-production_needs_reshaping7 = fread(fileID,[genAdj popsize],'double');
-fclose(fileID);
-
 %Reshape the matrix so that it is in the right format
 production_matrix1=reshape(production_needs_reshaping1,[popsize genAdj]);
 productionTraits1=production_matrix1';
@@ -61,9 +56,6 @@ productionTraits5=production_matrix5';
 production_matrix6=reshape(production_needs_reshaping6,[popsize genAdj]);
 productionTraits6=production_matrix6';
 
-production_matrix7=reshape(production_needs_reshaping7,[popsize genAdj]);
-productionTraits7=production_matrix7';
-
 %Production Plot
     figure(1);
     hold on
@@ -79,7 +71,6 @@ productionTraits7=production_matrix7';
     plotProFlat4=reshape(productionTraits4.',1,[]);
     plotProFlat5=reshape(productionTraits5.',1,[]);
     plotProFlat6=reshape(productionTraits6.',1,[]);
-    plotProFlat7=reshape(productionTraits7.',1,[]);
     
     transparency=1/50;
     size=3;
@@ -87,14 +78,11 @@ productionTraits7=production_matrix7';
     scatter(x_axis,plotProFlat1,...
         size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#a6cee3',...
         'MarkerEdgeColor','none')
-    %scatter(x_axis,plotProFlat3,...
-    %    size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#b2df8a',...
-    %    'MarkerEdgeColor','none')
+    scatter(x_axis,plotProFlat3,...
+        size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#e31a1c',...
+        'MarkerEdgeColor','none')
     scatter(x_axis,plotProFlat6,...
         size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#b2df8a',...
-        'MarkerEdgeColor','none')
-    scatter(x_axis,plotProFlat7,...
-        size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#e31a1c',...
         'MarkerEdgeColor','none')
     scatter(x_axis,plotProFlat2,...
         size,'filled','MarkerFaceAlpha',transparency,'MarkerFaceColor','#1f78b4',...
