@@ -9,7 +9,7 @@ Corresponding pre-print:
 https://www.biorxiv.org/content/10.1101/2020.08.30.274399v1
 
 # Figure 1
-overlaidPlot.m allows the user to re-create figure 1B after simulating results from the main game and recording those results in various txt files.
+overlaidPlot.m allows the user to re-create figure 1B after simulating results from the main game and recording those results in various txt files. The input would be six txt files containing the production data. In the data folder, we have uploaded the six production files used in our figure 1. 
 
 # Figure 2
 Individual simulations can be run with information provided in mainGame folder. 
