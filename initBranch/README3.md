@@ -4,6 +4,6 @@ The game can be called as previously stated in "mainGame" folder with a few chan
 The same shell and matlab file can be used for analyzing both games. 
 
 # Transition Matrix
-The transition matrix file (transitionMatrix.py) allows the user to predict the expected number of generations to subpopulation extinction for a given population size and defector frequency. 
+The transition matrix file (transitionMatrix.py) allows the user to predict the expected number of generations to subpopulation extinction for a given population size and defector equilibrium frequency. 
 
 The game and transition matrix results can be compared, as we do in figure 3C.
